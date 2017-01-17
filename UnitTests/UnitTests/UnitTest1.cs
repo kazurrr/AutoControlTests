@@ -10,37 +10,10 @@ namespace UnitTests
 
 
     [TestClass]
-    public class UnitTest1
+    public class UnitTests
     {
         private static Random random = new Random((int)DateTime.Now.Ticks);
-        private static String serverUrl = "http://localhost:9946";
-        private string randomString(int size)
-        {
-            StringBuilder builder = new StringBuilder();
-            char ch;
-            for (int i = 0; i < size; i++)
-            {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
-                builder.Append(ch);
-            }
-
-            return builder.ToString();
-        }
-
-        private string parseJsonToString(String json)
-        {   
-            json = json.Replace("[", "");
-            json = json.Replace("]", "");
-            json = json.Replace(",", "");
-            json = json.Replace("{", "");    
-            return json;
-        }
-
-        public String[] parseCarListToStringArray(String carList)
-        {
-            var arrayCalList = carList.Split('}');
-            return arrayCalList;
-        }
+        private static String serverUrl = "http://localhost:9946";        
 
         public String getAllCarsFromDatabase()
         {
@@ -137,6 +110,34 @@ namespace UnitTests
 
             carListString = getAllCarsFromDatabase();
             Assert.IsFalse(carListString.Contains("CarId\":" + result));
-        }       
+        }
+
+        private string randomString(int size)
+        {
+            StringBuilder builder = new StringBuilder();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
+        }
+
+        private string parseJsonToString(String json)
+        {
+            json = json.Replace("[", "");
+            json = json.Replace("]", "");
+            json = json.Replace(",", "");
+            json = json.Replace("{", "");
+            return json;
+        }
+
+        public String[] parseCarListToStringArray(String carList)
+        {
+            var arrayCalList = carList.Split('}');
+            return arrayCalList;
+        }
     }
 }
